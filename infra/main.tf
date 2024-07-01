@@ -39,6 +39,12 @@ variable "display_name" {
   default     = "Oracle CDC"
 }
 
+variable "image" {
+  description = "The image"
+  type        = string
+  default     = "europe-west1-docker.pkg.dev/shikanime-studio-labs/oracle-cdc-containers/oracle/database"
+}
+
 variable "password" {
   description = "The password"
   type        = string
@@ -87,7 +93,7 @@ module "container_vm" {
   version = "~> 3.1"
 
   container = {
-    image = "europe-west1-docker.pkg.dev/shikanime-studio-labs/oracle-cdc-containers/oracle/database"
+    image = var.image
     env = [
       {
         name  = "ORACLE_PWD"
