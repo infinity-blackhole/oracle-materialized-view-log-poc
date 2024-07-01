@@ -1,0 +1,11 @@
+{
+	"image": "mcr.microsoft.com/devcontainers/base:jammy",
+	"features": {
+		"ghcr.io/devcontainers/features/python:1": {
+			"installTools": true,
+			"installJupyterlab": true,
+			"version": "latest"
+		},
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
+	}
+}
