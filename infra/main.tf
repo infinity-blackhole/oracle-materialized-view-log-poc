@@ -161,7 +161,7 @@ module "instance_template" {
 
   region             = var.region
   project_id         = var.project_id
-  subnetwork         = module.vpc.subnets_names[0]
+  subnetwork         = module.vpc.subnets_self_links[0]
   subnetwork_project = var.project_id
   service_account = {
     email  = module.service_accounts.email
@@ -177,8 +177,9 @@ module "instance_template" {
   labels = {
     container-vm = module.container_vm.vm_container_label
   }
-  source_image = module.container_vm.source_image
-  spot         = true
+  source_image         = regex("https://www.googleapis.com/compute/v1/projects/.+/global/images/(?P<source_image>.+)", module.container_vm.source_image).source_image
+  source_image_project = regex("https://www.googleapis.com/compute/v1/projects/(?P<source_image_project>.+)/global/images/.+", module.container_vm.source_image).source_image_project
+  spot                 = true
 }
 
 module "compute_instance" {
